@@ -4,9 +4,10 @@ namespace API.Interfaces;
 
 public interface IMemberRepository
 {
-    void UpdateMember(Member member);
+    void Update(Member member);
     Task<IReadOnlyList<Member>> GetMembersAsync();
     Task<Member?> GetMemberByIdAsync(string id);
     Task<IReadOnlyList<Photo>> GetPhotosForMemberAsync(string memberId);
     Task<bool> SaveAllAsync();
+    Task<Member?> GetMemberForUpdate(string id);
 }
