@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Logincreds, User } from '../../types/user';
+import { Logincreds, RegisterCreds, User } from '../../types/user';
 import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -13,7 +13,17 @@ export class AccountService {
   currentUser = signal<User | null>(null);
   private baseUrl = environment.apiUrl;
 
-  login(creds: any) {
+  register(creds: RegisterCreds) {
+    return this.http.post<User>(this.baseUrl + 'account/register', creds).pipe(
+      tap(user => {
+        if (user) {
+          this.setCurrentuser(user);
+        }
+      })
+    );
+  }
+
+  login(creds: Logincreds) {
     return this.http.post<User>(this.baseUrl + 'account/login', creds).pipe(
       tap(user => {
         if (user) {
@@ -26,16 +36,6 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUser.set(null);
-  }
-
-  register(creds: Logincreds) {
-    return this.http.post<User>(this.baseUrl + 'account/register', creds).pipe(
-      tap(user => {
-        if (user) {
-          this.setCurrentuser(user);
-        }
-      })
-    );
   }
 
   setCurrentuser(user: User) {
