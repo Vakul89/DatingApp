@@ -104,7 +104,7 @@ namespace API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("publicId")
+                    b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

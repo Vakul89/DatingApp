@@ -5,10 +5,11 @@ import { MemberService } from '../../../core/services/member-service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastService } from '../../../core/services/toast-service';
 import { AccountService } from '../../../core/services/account-service';
+import { TimeAgoPipe } from '../../../core/pipes/time-ago-pipe';
 
 @Component({
   selector: 'app-member-profile',
-  imports: [DatePipe, FormsModule],
+  imports: [DatePipe, FormsModule, TimeAgoPipe],
   templateUrl: './member-profile.html',
   styleUrl: './member-profile.css',
 })
@@ -42,7 +43,7 @@ export class MemberProfile implements OnInit, OnDestroy {
   updateProfile() {
     if (!this.memberService.member()) return;
     const updatedMember = { ...this.memberService.member(), ...this.editableMember };
-    this.memberService.updatemember(this.editableMember).subscribe({
+    this.memberService.updateMember(this.editableMember).subscribe({
       next: () => {
         const currentUser = this.accountService.currentUser();
         if (currentUser && updatedMember.displayName !== currentUser?.displayName) {

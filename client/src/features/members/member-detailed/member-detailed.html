@@ -28,20 +28,21 @@
         </div>
     </div>
 
-    <div class="card bg-base-100 w-3/4 p-6">
+    <div class="card bg-base-100 w-3/4 p-6 flex flex-col h-[85vh]">
         <div class="flex justify-between items-center">
             <h3 class="card-title text-3xl text-primary">{{title()}}</h3>
             @if(isCurrentUser()){
             <button class="btn btn-primary btn-outline" (click)="memberService.editMode.set(!memberService.editMode())">
-                {{memberService.editMode() ? 'Cancel' : 'Edit'}}</button>
+                {{memberService.editMode() ? 'Cancel' : 'Edit'}}
+            </button>
             }
         </div>
         <div class="divider"></div>
-        <div>
-            <router-outlet></router-outlet>
+        <div class="h-full">
+            <router-outlet />
         </div>
     </div>
 </div>
 } @else {
-<div>member not found</div>
+<div>Member not found</div>
 }
