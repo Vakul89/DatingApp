@@ -4,7 +4,8 @@ import { Member, MemberParams } from '../../../types/member';
 import { MemberCard } from "../member-card/member-card";
 import { PaginatedResult } from '../../../types/pagination';
 import { Paginator } from "../../../shared/paginator/paginator";
-import { FilterModal } from '../../member/filter-modal/filter-modal';
+import { FilterModal } from '../filter-modal/filter-modal';
+
 
 @Component({
   selector: 'app-member-list',
