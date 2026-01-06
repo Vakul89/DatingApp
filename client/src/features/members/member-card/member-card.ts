@@ -21,14 +21,6 @@ export class MemberCard {
 
   toggleLike(event: Event) {
     event.stopPropagation();
-    this.likesService.toggleLike(this.member().id).subscribe({
-      next: () => {
-        if (this.hasLiked()) {
-          this.likesService.likesIds.update(ids => ids.filter(x => x !== this.member().id));
-        } else {
-          this.likesService.likesIds.update(ids => [...ids, this.member().id]);
-        }
-      }
-    })
+    this.likesService.toggleLike(this.member().id);
   }
 }
