@@ -51,6 +51,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .WithMany(m => m.MessageSent)
             .OnDelete(DeleteBehavior.Restrict);
 
+        modelBuilder.Entity<Photo>()
+            .HasQueryFilter(x => x.IsApproved);
+
         var dateTimeConverter = new ValueConverter<DateTime, DateTime>(
             v => v.ToUniversalTime(),
             v => DateTime.SpecifyKind(v, DateTimeKind.Utc)

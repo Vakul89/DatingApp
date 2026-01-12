@@ -30,10 +30,8 @@ namespace API.Controllers
         [HttpGet("{id}/photos")]
         public async Task<ActionResult<IReadOnlyList<Photo>>> GetMemberPhotos(string id)
         {
-            var member = await unitOfWork.MemberRepository.GetPhotosForMemberAsync(id);
-            if (member == null) return NotFound();
-
-            return Ok(member);
+            var isCurrentUser = User.GetMemberId() == id;
+            return Ok(await unitOfWork.MemberRepository.GetPhotosForMemberAsync(id, isCurrentUser));
         }
 
         [HttpPut]
@@ -74,12 +72,6 @@ namespace API.Controllers
                 PublicId = result.PublicId,
                 MemberId = User.GetMemberId()
             };
-
-            if (member.ImageUrl == null)
-            {
-                member.ImageUrl = photo.Url;
-                member.User.ImageUrl = photo.Url;
-            }
 
             member.Photos.Add(photo);
 
