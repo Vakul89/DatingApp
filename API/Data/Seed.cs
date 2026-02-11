@@ -65,7 +65,7 @@ public class Seed
         var admin = new AppUser
         {
             UserName = "admin",
-            Email = "admin@datingapp.com",
+            Email = "admin@connectapp.com",
             DisplayName = "Admin"
         };
 

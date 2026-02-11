@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full h-[72vh]">
+<div class="flex flex-col w-full h-[70vh]">
     <div class="flex flex-col grow overflow-auto">
         @for (message of messageService.messageThread(); track message.id) {
         <div class="chat" [class.chat-start]="!message.currentUserSender" [class.chat-end]="message.currentUserSender">
